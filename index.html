@@ -8,7 +8,7 @@
 </head>
 <body>
     <h2>Tutorial de Godot 4</h2>
-    <h1>Jugar a la pinta</h1>
+    <h1>Jugando con chispas</h1>
     <p>Descubre cómo crear tu propio juego paso a paso.</p>
     <br><hr><hr><br>
     <h3>Temario</h3>
@@ -41,8 +41,69 @@
     <p>Vamos a calzar los sprites de movimiento, reposo, y acción.</p>
     <br><hr><br>
     <h4>Husmeando el entorno de Godot 4.</h4>
-    <p>Vamos a darle un vistazo al entorno de Godot 4, clickeando y </p>
-    <p>Crear Nodo del jugador, subir las animaciones, y crear colisiones</p>
+    <p>Instalamos Godot, y abrimos el ejecutable</p>
+    <img src="./img/godot-exe.webp" alt="">
+    <p>Vamos a crear un nuevo proyecto, le daremos un nombre y clickeamos crear.</p>
+    <img src="./img/new-project.webp" alt="">
+    <p>Se tomará unos segundos en iniciar...</p>
+    <img src="./img/loading.webp" alt="">
+    <p>Vamos a darle un vistazo al entorno de Godot 4, clickeando e investigando</p>
+    <img src="./img/blank-project.webp" alt="" width="800">
+    <p>Vamos a cargar las imágenes de los sprites al proyecto.</p>
+    <p>Primero vamos a ubicar la carpeta del proyecto.</p>
+    <img src="./img/find-project-folder.webp" alt="">
+    <p>Veremos los archivos por defecto de la carpeta</p>
+    <img src="./img/default-project-files.webp" alt="">
+    <p>Pegaremos ahí la carpeta con todo nuestro arte, de la carpeta *art*</p>
+    <img src="./img/default-project-files-with-art-folder.webp" alt="">
+    <p>Confirmamos que aparece la carpeta art.</p>
+    <img src="./img/confirm-art-folder.webp" alt="">
+    <!-- <p>¿Qué ocurre si intentamos correr el proyecto en blanco?</p>
+    <p>Arriba a la derecha veremos el botón para iniciar proyecto.</p>
+    <img src="./img/run-project.webp" alt=""> -->
+    <h5>Crear Nodo del jugador, subir las animaciones, y crear colisiones</h5>
+    <p>Creamos un node tipo other</p>
+    <img src="./img/new-node.webp" alt="">
+    <p>Buscamos Area2D, seleccionamos Area2D, y le damos click a crear.</p>
+    <img src="./img/new-area2d.webp" alt="">
+    <p>Si lo lograste verás el objeto creado.</p>
+    <img src="./img/area2d-created.webp" alt="">
+    <p>Para que sea más entendible, lo renombraremos a "Jugador" (con mayúscula en la primera letra siguiendo las convenciones)</p>
+    <img src="./img/area2d-renamed-jugador.webp" alt="">
+    <p>¡Perfecto! Tenemos una especie de "DIV" (como si fuera HTML), un espacio en blanco donde irá nuestro personaje.</p>
+    <p>Ahora necesitamos un objeto que muestre las animaciones.</p>
+    <p>Crearemos un objeto tipo AnimatedSprite2D</p>
+    <P>Click derecho en "Jugador", crearemos un nodo hijo.</P>
+    <img src="./img/jugador-new-child.webp" alt="">
+    <p>Buscamos AnimatedSprite2D, seleccionamos y le damos a crear.</p>
+    <img src="./img/jugador-new-animatedsprite2d.webp" alt="">
+    <p>Una vez creado debiera verse así.</p>
+    <img src="./img/jugador-created-animatedsprite2d.webp" alt="">
+    <p>Al costado derecho deberíamos ver un panel de inspección, con las opciones para agregar las animaciones.</p>
+    <img src="./img/jugador-animatedsprite-new-spriteframes.webp" alt="">
+    <p>Al hacer click en "Sprite Frames" veremos un panel para agregar animaciones.</p>
+    <img src="./img/jugador-animatedsprite-animations-panel.webp" alt="">
+    <p>Renombraremos la animación "default" por "caminar" y hacemos click en el ícono de la carpeta.</p>
+    <img src="./img/jugador-animatedsprite-animations-rename.webp" alt="">
+    <p>El ícono de la carpeta nos desplegará una galería de imágenes disponibles.</p>
+    <p>Manteniendo la tecla CTRL presionada, iremos seleccionando las imágenes para la animación de caminar, y hacemos click en Abrir.</p>
+    <img src="./img/jugador-animatedsprite-animations-select-multiple-create.webp" alt="">
+    <p>Si todo va bien deberías ver algo así:</p>
+    <img src="./img/jugador-animatedsprite-animations-selected-multiple.webp" alt="">
+    <p>Aún falta agregar más animaciones, como "Subir".</p>
+    <p>Creamos una nueva animación usando el botón de crear más animaciones (Es el primer botón con una cruz verde)</p>
+    <img src="./img/jugador-animatedsprite-animations-more.webp" alt="">
+    <p>Renombramos a "subir", y asignamos las imágenes respectivas.</p>
+    <img src="./img/jugador-animatedsprite-animations-more-up.webp" alt="">
+    <p>Ya podríamos ejecutar nuestra primera escena, pero primero debemos guardar los cambios.</p>
+    <p>CTRL + S para guardar, o el botón de inciar escena que pedirá guardar la escena.</p>
+    <img src="./img/jugador-save-scene.webp" alt="">
+    <p>Confirmamos y dejamos los valores como están, sólo hacemos click en guardar.</p>
+    <img src="./img/jugador-save-scene-save.webp" alt="">
+    <p>En la barra superior derecha veremos los botones para ejecutar.</p>
+    <img src="./img/run-scene.webp" alt="">
+    <p>¡Voilá! Así debiera verse el personaje, aún no hemos configurado movimientos, fondos, sonidos, ni nada, esto recién comienza.</p>
+    <img src="./img/jugador-first-run.webp" alt="">
     <br><hr><br>
     <h4>Movimientos básicos y la acción principal.</h4>
     <p>Vamos a definir las teclas de nuestro personaje principal</p>
