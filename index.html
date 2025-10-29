@@ -1,171 +1,286 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jugar a la pinta.</title>
+    <title>Tutorial de Godot 4 - Jugando con Chispas</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2>Tutorial de Godot 4</h2>
-    <h1>Jugando con chispas</h1>
-    <p>Descubre cómo crear tu propio juego paso a paso.</p>
-    <br><hr><hr><br>
-    <h3>Temario</h3>
-    <p>
-        - Clase 1: Creándome como personaje.<br>
-        &nbsp;&nbsp; - Me describo como...<br>
-        &nbsp;&nbsp; - Sprites: idle, walking, action.<br>
-        &nbsp;&nbsp; - Husmeando el entorno de Godot 4.<br>
-        &nbsp;&nbsp; - Movimientos básicos y la acción principal.<br><br>
-        - Clase 2: Creando al enemigo.<br>
-        &nbsp;&nbsp; - Spawn de enemigos<br>
-        &nbsp;&nbsp; - Ajustando el mapa<br><br>
-        - Clase 3: Arreglando detalles.<br>
-        &nbsp;&nbsp; - Mejorando la interfaz de usuario en el menú principal.<br>
-        &nbsp;&nbsp; - Mejorando la competitividad agregando puntuación.<br>
-        &nbsp;&nbsp; - Mejorando experiencia de usuario agregando música.<br><br>
-        - Clase 4: Multijugador.<br>
-        &nbsp;&nbsp; - Dos jugadores en un mismo computador.<br>
-        &nbsp;&nbsp; - Módulo de conexión LAN<br><br>
-        - Cierre.<br>
-        &nbsp;&nbsp; - Preguntas finales.<br>
-        &nbsp;&nbsp; - Agradecimientos.<br><br>
-    </p>
-    <br><hr><hr><br>
-    <h3>Clase 1: Creándome como personaje.</h3>
-    <h4>Me describo como...</h4>
-    <p>Vamos a describirnos, y le pediremos a la IA que genere un sprite de nosotros.</p>
-    <br><hr><br>
-    <h4>Creando sprites: idle, walking, action.</h4>
-    <p>Vamos a calzar los sprites de movimiento, reposo, y acción.</p>
-    <br><hr><br>
-    <h4>Husmeando el entorno de Godot 4.</h4>
-    <p>Instalamos Godot, y abrimos el ejecutable</p>
-    <img src="./img/godot-exe.webp" alt="">
-    <p>Vamos a crear un nuevo proyecto, le daremos un nombre y clickeamos crear.</p>
-    <img src="./img/new-project.webp" alt="">
-    <p>Se tomará unos segundos en iniciar...</p>
-    <img src="./img/loading.webp" alt="">
-    <p>Vamos a darle un vistazo al entorno de Godot 4, clickeando e investigando</p>
-    <img src="./img/blank-project.webp" alt="" width="800">
-    <p>Vamos a cargar las imágenes de los sprites al proyecto.</p>
-    <p>Primero vamos a ubicar la carpeta del proyecto.</p>
-    <img src="./img/find-project-folder.webp" alt="">
-    <p>Veremos los archivos por defecto de la carpeta</p>
-    <img src="./img/default-project-files.webp" alt="">
-    <p>Pegaremos ahí la carpeta con todo nuestro arte, de la carpeta *art*</p>
-    <img src="./img/default-project-files-with-art-folder.webp" alt="">
-    <p>Confirmamos que aparece la carpeta art.</p>
-    <img src="./img/confirm-art-folder.webp" alt="">
-    <!-- <p>¿Qué ocurre si intentamos correr el proyecto en blanco?</p>
-    <p>Arriba a la derecha veremos el botón para iniciar proyecto.</p>
-    <img src="./img/run-project.webp" alt=""> -->
-    <h5>Crear Nodo del jugador, subir las animaciones, y crear colisiones</h5>
-    <p>Creamos un node tipo other</p>
-    <img src="./img/new-node.webp" alt="">
-    <p>Buscamos Area2D, seleccionamos Area2D, y le damos click a crear.</p>
-    <img src="./img/new-area2d.webp" alt="">
-    <p>Si lo lograste verás el objeto creado.</p>
-    <img src="./img/area2d-created.webp" alt="">
-    <p>Para que sea más entendible, lo renombraremos a "Jugador" (con mayúscula en la primera letra siguiendo las convenciones)</p>
-    <img src="./img/area2d-renamed-jugador.webp" alt="">
-    <p>¡Perfecto! Tenemos una especie de "DIV" (como si fuera HTML), un espacio en blanco donde irá nuestro personaje.</p>
-    <p>Ahora necesitamos un objeto que muestre las animaciones.</p>
-    <p>Crearemos un objeto tipo AnimatedSprite2D</p>
-    <P>Click derecho en "Jugador", crearemos un nodo hijo.</P>
-    <img src="./img/jugador-new-child.webp" alt="">
-    <p>Buscamos AnimatedSprite2D, seleccionamos y le damos a crear.</p>
-    <img src="./img/jugador-new-animatedsprite2d.webp" alt="">
-    <p>Una vez creado debiera verse así.</p>
-    <img src="./img/jugador-created-animatedsprite2d.webp" alt="">
-    <p>Al costado derecho deberíamos ver un panel de inspección, con las opciones para agregar las animaciones.</p>
-    <img src="./img/jugador-animatedsprite-new-spriteframes.webp" alt="">
-    <p>Al hacer click en "Sprite Frames" veremos un panel para agregar animaciones.</p>
-    <img src="./img/jugador-animatedsprite-animations-panel.webp" alt="">
-    <p>Renombraremos la animación "default" por "caminar" y hacemos click en el ícono de la carpeta.</p>
-    <img src="./img/jugador-animatedsprite-animations-rename.webp" alt="">
-    <p>El ícono de la carpeta nos desplegará una galería de imágenes disponibles.</p>
-    <p>Manteniendo la tecla CTRL presionada, iremos seleccionando las imágenes para la animación de caminar, y hacemos click en Abrir.</p>
-    <img src="./img/jugador-animatedsprite-animations-select-multiple-create.webp" alt="">
-    <p>Si todo va bien deberías ver algo así:</p>
-    <img src="./img/jugador-animatedsprite-animations-selected-multiple.webp" alt="">
-    <p>Aún falta agregar más animaciones, como "Subir".</p>
-    <p>Creamos una nueva animación usando el botón de crear más animaciones (Es el primer botón con una cruz verde)</p>
-    <img src="./img/jugador-animatedsprite-animations-more.webp" alt="">
-    <p>Renombramos a "subir", y asignamos las imágenes respectivas.</p>
-    <img src="./img/jugador-animatedsprite-animations-more-up.webp" alt="">
-    <p>Ya podríamos ejecutar nuestra primera escena, pero primero debemos guardar los cambios.</p>
-    <p>CTRL + S para guardar, o el botón de inciar escena que pedirá guardar la escena.</p>
-    <img src="./img/jugador-save-scene.webp" alt="">
-    <p>Confirmamos y dejamos los valores como están, sólo hacemos click en guardar.</p>
-    <img src="./img/jugador-save-scene-save.webp" alt="">
-    <p>En la barra superior derecha veremos los botones para ejecutar.</p>
-    <img src="./img/run-scene.webp" alt="">
-    <p>¡Voilá! Así debiera verse el personaje, aún no hemos configurado movimientos, fondos, sonidos, ni nada, esto recién comienza.</p>
-    <img src="./img/jugador-first-run.webp" alt="">
-    <br><hr><br>
-    <h4>Movimientos básicos y la acción principal.</h4>
-    <p>Vamos a definir las teclas de nuestro personaje principal</p>
-    <br><hr><br>
-    <h4>Desafío</h4>
-    <p>1. Añadir más frames para cada animación, para que el movimiento sea más suave.</p>
-    <p>2. Crear más acciones para el personaje y linkearlo a otras teclas.</p>
-    <p>3. Crea un enemigo, un aliado y un jefe final.</p>
-    <br>
-    <hr>
-    <hr>
-    <br>
-    <h3>Clase 2: Creando al enemigo.</h3>
-    <h4>Spawn de enemigos.</h4>
-    <p>Vamos a crear varios enemigos genéricos.</p>
-    <br><hr><br>
-    <h4>Ajustando el mapa</h4>
-    <p>Vamos a ajustar los puntos de donde nacen los enemigos.</p>
-    <br>
-    <hr>
-    <hr>
-    <br>
-    <h3>Clase 3: Arreglando detalles.</h3>
-    <h4>Interfaz de usuario en el menú principal.</h4>
-    <p>Vamos a añadir más Botones de inicio, pausa y game over.</p>
-    <h4>Mejorando la competitividad agregando puntuación.</h4>
-    <p>Vamos a añadir puntuación para mejorar la competitividad.</p>
-    <h4>Experiencia de usuario al agregar música.</h4>
-    <p>Vamos a añadir música de fondo para mejorar la jugabilidad.</p>
-    <br><hr><br>
-    <h4>Añadir la música</h4>
-    <p>Vamos a añadir música al juego.</p>
-    <h4>Desafío</h4>
-    <p>1. Añadir un botón para los créditos.</p>
-    <p>2. Añadir un botón para cambiar de canción y otro para mutear el juego.</p>
-    <p>3. Añadir un botón para salir del juego.</p>
-    <br>
-    <hr>
-    <hr>
-    <br>
-    <h3>Clase 4: Multijugador.</h3>
-    <h4>Lograr que dos jugadores puedar interactuar en la misma pantalla.</h4>
-    <p>Vamos a añadir un segundo jugador en la misma pantalla del mismo computador.</p>
-    <br><hr><br>
-    <h4>Añadir un módulo de conexión LAN</h4>
-    <p>Vamos a añadir un fragmento necesario para conectarse a un servidor dedicado.</p>
-    <h4>Desafío</h4>
-    <p>1. Configurar un descubridor de puertos del juego disponible automáticamente.</p>
-    <p>2. Crear salas de juego diferentes.</p>
-    <p>3. Apalear los problemas que puedan estar causando lag, jittering, y otros problemas.</p>
-    <br>
-    <hr>
-    <hr>
-    <br>
-    <h3>Cierre.</h3>
-    <h4>Preguntas finales.</h4>
-    <p>Estaré atento a todas las preguntas.</p>
-    <br><hr><br>
-    <h4>Agradecimientos</h4>
-    <p>Gracias a todos por su asistencia.</p>
-    <br><hr><br>
-    <h4>Batalla final.</h4>
-    <p>Todos contra todos.</p>
+    <div class="container">
+        <header>
+            <h2>Tutorial de Godot 4</h2>
+            <h1>🎮 Jugando con Chispas⚡</h1>
+            <p>Descubre cómo crear tu propio juego paso a paso</p>
+        </header>
+
+        <nav>
+            <button class="nav-collapsible">📋 Temario</button>
+            <div class="nav-collapsible-content">
+                <div class="nav-collapsible-content-inner">
+            <ul>
+                <li>
+                    <a href="#clase1">Clase 1: Creándome como personaje</a>
+                    <ul>
+                        <li><a href="#descripcion">Me describo como...</a></li>
+                        <li><a href="#sprites">Sprites: idle, walking, action</a></li>
+                        <li><a href="#entorno">Husmeando el entorno de Godot 4</a></li>
+                        <li><a href="#movimientos">Movimientos básicos y acción principal</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#clase2">Clase 2: Creando al enemigo</a>
+                    <ul>
+                        <li><a href="#spawn">Spawn de enemigos</a></li>
+                        <li><a href="#mapa">Ajustando el mapa</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#clase3">Clase 3: Arreglando detalles</a>
+                    <ul>
+                        <li><a href="#interfaz">Interfaz de usuario</a></li>
+                        <li><a href="#puntuacion">Sistema de puntuación</a></li>
+                        <li><a href="#musica">Música de fondo</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#clase4">Clase 4: Multijugador</a>
+                    <ul>
+                        <li><a href="#local">Dos jugadores locales</a></li>
+                        <li><a href="#lan">Módulo de conexión LAN</a></li>
+                    </ul>
+                </li>
+                <li><a href="#cierre">Cierre y agradecimientos</a></li>
+            </ul>
+                </div>
+            </div>
+        </nav>
+
+        <section id="clase1">
+            <h3>🎨 Clase 1: Creándome como Personaje</h3>
+            
+            <button class="collapsible" id="descripcion">Me describo como... ¡un androide!</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <p>Vamos a describirnos, y le pediremos a la IA que genere un sprite de nosotros.</p>
+                </div>
+            </div>
+            
+            <button class="collapsible" id="sprites">Creando sprites: idle, walking, action</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <p>Vamos a calzar los sprites de movimiento, reposo, y acción.</p>
+                </div>
+            </div>
+            
+            <button class="collapsible" id="entorno">Husmeando el entorno de Godot 4</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+            <p>Instalamos Godot, y abrimos el ejecutable</p>
+            <img src="./img/godot-exe.webp" alt="Ejecutable de Godot">
+            
+            <p>Vamos a crear un nuevo proyecto, le daremos un nombre y clickeamos crear.</p>
+            <img src="./img/new-project.webp" alt="Nuevo proyecto">
+            
+            <p>Se tomará unos segundos en iniciar...</p>
+            <img src="./img/loading.webp" alt="Cargando">
+            
+            <p>Vamos a darle un vistazo al entorno de Godot 4, clickeando e investigando</p>
+            <img src="./img/blank-project.webp" alt="Proyecto en blanco">
+            
+            <p>Vamos a cargar las imágenes de los sprites al proyecto.</p>
+            <p>Primero vamos a ubicar la carpeta del proyecto.</p>
+            <img src="./img/find-project-folder.webp" alt="Ubicar carpeta del proyecto">
+            
+            <p>Veremos los archivos por defecto de la carpeta</p>
+            <img src="./img/default-project-files.webp" alt="Archivos por defecto">
+            
+            <p>Pegaremos ahí la carpeta con todo nuestro arte, de la carpeta *art*</p>
+            <img src="./img/default-project-files-with-art-folder.webp" alt="Archivos con carpeta art">
+            
+            <p>Confirmamos que aparece la carpeta art.</p>
+            <img src="./img/confirm-art-folder.webp" alt="Confirmar carpeta art">
+            
+            <h5>Crear Nodo del jugador, subir las animaciones, y crear colisiones</h5>
+            
+            <p>Creamos un node tipo other</p>
+            <img src="./img/new-node.webp" alt="Nuevo nodo">
+            
+            <p>Buscamos Area2D, seleccionamos Area2D, y le damos click a crear.</p>
+            <img src="./img/new-area2d.webp" alt="Nuevo Area2D">
+            
+            <p>Si lo lograste verás el objeto creado.</p>
+            <img src="./img/area2d-created.webp" alt="Area2D creado">
+            
+            <p>Para que sea más entendible, lo renombraremos a "Jugador" (con mayúscula en la primera letra siguiendo las convenciones)</p>
+            <img src="./img/area2d-renamed-jugador.webp" alt="Renombrado a Jugador">
+            
+            <p>¡Perfecto! Tenemos una especie de "DIV" (como si fuera HTML), un espacio en blanco donde irá nuestro personaje.</p>
+            
+            <p>Ahora necesitamos un objeto que muestre las animaciones.</p>
+            <p>Crearemos un objeto tipo AnimatedSprite2D</p>
+            <p>Click derecho en "Jugador", crearemos un nodo hijo.</p>
+            <img src="./img/jugador-new-child.webp" alt="Nuevo nodo hijo">
+            
+            <p>Buscamos AnimatedSprite2D, seleccionamos y le damos a crear.</p>
+            <img src="./img/jugador-new-animatedsprite2d.webp" alt="Nuevo AnimatedSprite2D">
+            
+            <p>Una vez creado debiera verse así.</p>
+            <img src="./img/jugador-created-animatedsprite2d.webp" alt="AnimatedSprite2D creado">
+            
+            <p>Al costado derecho deberíamos ver un panel de inspección, con las opciones para agregar las animaciones.</p>
+            <img src="./img/jugador-animatedsprite-new-spriteframes.webp" alt="Nuevo SpriteFrames">
+            
+            <p>Al hacer click en "Sprite Frames" veremos un panel para agregar animaciones.</p>
+            <img src="./img/jugador-animatedsprite-animations-panel.webp" alt="Panel de animaciones">
+            
+            <p>Renombraremos la animación "default" por "caminar" y hacemos click en el ícono de la carpeta.</p>
+            <img src="./img/jugador-animatedsprite-animations-rename.webp" alt="Renombrar animación">
+            
+            <p>El ícono de la carpeta nos desplegará una galería de imágenes disponibles.</p>
+            <p>Manteniendo la tecla CTRL presionada, iremos seleccionando las imágenes para la animación de caminar, y hacemos click en Abrir.</p>
+            <img src="./img/jugador-animatedsprite-animations-select-multiple-create.webp" alt="Seleccionar múltiples imágenes">
+            
+            <p>Si todo va bien deberías ver algo así:</p>
+            <img src="./img/jugador-animatedsprite-animations-selected-multiple.webp" alt="Múltiples imágenes seleccionadas">
+            
+            <p>Aún falta agregar más animaciones, como "Subir".</p>
+            <p>Creamos una nueva animación usando el botón de crear más animaciones (Es el primer botón con una cruz verde)</p>
+            <img src="./img/jugador-animatedsprite-animations-more.webp" alt="Más animaciones">
+            
+            <p>Renombramos a "subir", y asignamos las imágenes respectivas.</p>
+            <img src="./img/jugador-animatedsprite-animations-more-up.webp" alt="Animación subir">
+            
+            <p>Ya podríamos ejecutar nuestra primera escena, pero primero debemos guardar los cambios.</p>
+            <p>CTRL + S para guardar, o el botón de iniciar escena que pedirá guardar la escena.</p>
+            <img src="./img/jugador-save-scene.webp" alt="Guardar escena">
+            
+            <p>Confirmamos y dejamos los valores como están, sólo hacemos click en guardar.</p>
+            <img src="./img/jugador-save-scene-save.webp" alt="Confirmar guardado">
+            
+            <p>En la barra superior derecha veremos los botones para ejecutar.</p>
+            <img src="./img/run-scene.webp" alt="Ejecutar escena">
+            
+            <p>¡Voilá! Así debiera verse el personaje, aún no hemos configurado movimientos, fondos, sonidos, ni nada, esto recién comienza.</p>
+            <img src="./img/jugador-first-run.webp" alt="Primera ejecución">
+                </div>
+            </div>
+            
+            <button class="collapsible" id="movimientos">Movimientos básicos y la acción principal</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <p>Vamos a definir las teclas de nuestro personaje principal</p>
+                </div>
+            </div>
+            <button class="collapsible collapsible-challenge" id="movimientos">Desafío</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <div class="challenge">
+                        <h4>💪 Desafío</h4>
+                        <p>1. Añadir más frames para cada animación, para que el movimiento sea más suave.</p>
+                        <p>2. Crear más acciones para el personaje y linkearlo a otras teclas.</p>
+                        <p>3. Crea un enemigo, un aliado y un jefe final.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="clase2">
+            <h3>👾 Clase 2: Creando al Enemigo</h3>
+            
+            <button class="collapsible" id="spawn">Spawn de enemigos</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <p>Vamos a crear varios enemigos genéricos.</p>
+                </div>
+            </div>
+            
+            <button class="collapsible" id="mapa">Ajustando el mapa</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <p>Vamos a ajustar los puntos de donde nacen los enemigos.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="clase3">
+            <h3>✨ Clase 3: Arreglando Detalles</h3>
+            
+            <button class="collapsible" id="interfaz">Interfaz de usuario en el menú principal</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <p>Vamos a añadir más Botones de inicio, pausa y game over.</p>
+                </div>
+            </div>
+            
+            <button class="collapsible" id="puntuacion">Mejorando la competitividad agregando puntuación</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <p>Vamos a añadir puntuación para mejorar la competitividad.</p>
+                </div>
+            </div>
+            
+            <button class="collapsible" id="musica">Experiencia de usuario al agregar música</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <p>Vamos a añadir música de fondo para mejorar la jugabilidad.</p>
+            
+            <div class="challenge">
+                <h4>💪 Desafío</h4>
+                <p>1. Añadir un botón para los créditos.</p>
+                <p>2. Añadir un botón para cambiar de canción y otro para mutear el juego.</p>
+                <p>3. Añadir un botón para salir del juego.</p>
+            </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="clase4">
+            <h3>🎮 Clase 4: Multijugador</h3>
+            
+            <button class="collapsible" id="local">Lograr que dos jugadores puedan interactuar en la misma pantalla</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <p>Vamos a añadir un segundo jugador en la misma pantalla del mismo computador.</p>
+                </div>
+            </div>
+            
+            <button class="collapsible" id="lan">Añadir un módulo de conexión LAN</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <p>Vamos a añadir un fragmento necesario para conectarse a un servidor dedicado.</p>
+            
+            <div class="challenge">
+                <h4>💪 Desafío</h4>
+                <p>1. Configurar un descubridor de puertos del juego disponible automáticamente.</p>
+                <p>2. Crear salas de juego diferentes.</p>
+                <p>3. Apalear los problemas que puedan estar causando lag, jittering, y otros problemas.</p>
+            </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cierre">
+            <h3>🎉 Cierre</h3>
+            
+            <h4>Preguntas finales</h4>
+            <p>Estaré atento a todas las preguntas.</p>
+            
+            <div class="divider"></div>
+            
+            <h4>Agradecimientos</h4>
+            <p>Gracias a todos por su asistencia.</p>
+            
+            <div class="divider"></div>
+            
+            <h4>⚔️ Batalla final</h4>
+            <p>Todos contra todos.</p>
+        </section>
+
+        <footer>
+            <p>✨ Tutorial creado con 💙 para aprender Godot 4 ✨</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
