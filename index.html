@@ -63,6 +63,10 @@
             <div class="collapsible-content">
                 <div class="collapsible-content-inner">
                     <p>Vamos a describirnos, y le pediremos a la IA que genere un sprite de nosotros.</p>
+                    <p>Le pasaremos ese texto a Nano Banana, y generaremos un personaje.</p>
+                    <img src="./img/nano-banana-banner.png" alt="">
+                    <p>Veremos la interfaz de AI Studio, haremos un prompt y generaremos nuestro personaje.</p>
+                    <img src="./img/ai-studio-nano-banana.webp" alt="">
                 </div>
             </div>
             
@@ -170,6 +174,49 @@
             <div class="collapsible-content">
                 <div class="collapsible-content-inner">
                     <p>Vamos a definir las teclas de nuestro personaje principal</p>
+                    <p>Arriba en el editor buscaremos la opción del editor del proyecto.</p>
+                    <img src="./img/project-settings-bar.webp" alt="">
+                    <p>Iremos a Input Bar y iremos agregando las teclas para mover el personaje.</p>
+                    <img src="./img/project-settings-input-bar.webp" alt="">
+                    <p>vamos a crear un archivo para pegar el código que moverá al personaje.</p>
+                    <img src="./img/create-code.webp" alt="">
+                    <pre><code>
+extends Area2D
+
+@export var speed = 400
+var screen_size
+
+func _ready():
+	screen_size = get_viewport_rect().size
+
+func _process(delta):
+	var velocity = Vector2.ZERO
+	if Input.is_action_pressed("move_right"):
+		velocity.x += 1
+	if Input.is_action_pressed("move_left"):
+		velocity.x -= 1
+	if Input.is_action_pressed("move_down"):
+		velocity.y += 1
+	if Input.is_action_pressed("move_up"):
+		velocity.y -= 1
+
+	if velocity.length() > 0:
+		velocity = velocity.normalized() * speed
+		$AnimatedSprite2D.play()
+	else:
+		$AnimatedSprite2D.stop()
+	if velocity.x != 0:
+		$AnimatedSprite2D.animation = "caminar"
+		$AnimatedSprite2D.flip_v = false
+		# See the note below about the following boolean assignment.
+		$AnimatedSprite2D.flip_h = velocity.x < 0
+	elif velocity.y != 0:
+		$AnimatedSprite2D.animation = "subir"
+		$AnimatedSprite2D.flip_v = velocity.y > 0
+	position += velocity * delta
+	position = position.clamp(Vector2.ZERO, screen_size)
+                    </code></pre>
+                    <p>Y listo, al ejecutar debería moverse por la pantalla.</p>
                 </div>
             </div>
             <button class="collapsible collapsible-challenge" id="movimientos">Desafío</button>
