@@ -16,3 +16,18 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
+function copyCode(btn) {
+  const code = btn.nextElementSibling.textContent;
+  navigator.clipboard
+    .writeText(code)
+    .then(() => {
+      btn.querySelector("svg").style.opacity = "0.6";
+      btn.lastChild.textContent = "¡Copiado!";
+      setTimeout(() => {
+        btn.querySelector("svg").style.opacity = "1";
+        btn.lastChild.textContent = "Copiar";
+      }, 1500);
+    })
+    .catch((err) => console.error("Copy failed", err));
+}
