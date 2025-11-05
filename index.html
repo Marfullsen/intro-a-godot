@@ -193,8 +193,7 @@
                             </svg>
                             Copiar
                         </button>
-                        <pre><code id="code-block">
-extends Area2D
+                        <pre><code id="code-block">extends Area2D
 
 @export var speed = 400
 var screen_size
@@ -247,6 +246,43 @@ func _process(delta):
 
         <section id="clase2">
             <h3>👾 Clase 2: Creando al Enemigo</h3>
+
+            <button class="collapsible" id="spawn">Colisiones entre personajes</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <p>Vamos a crear la zona de colisión de nuestro personaje principal, con la cual interactuaremos con los futuros enemigos.</p>
+                    <p>Primero seleccionamos el nodo del jugador, y añadiremos un nodo.</p>
+                    <img src="./img/jugador-collision-node.webp" alt="">
+
+                    <p>Tan sólo con escribir "COLL" ya debiera ser posible ver "CollisionShape2D", le damos click en crear.</p>
+                    <img src="./img/jugador-collision-coll.webp" alt="">
+
+                    <p>Una vez creado debieramos ver algo así:</p>
+                    <img src="./img/jugador-collision-coll-created.webp" alt="">
+
+                    <p>Debemos darle una forma a la zona de colisión, en mi caso será un óvalo pero hay muchísimas formas disponibles.</p>
+                    <p>En el menú de la derecha, en el inspector, crearemos la colisión.</p>
+                    <img src="./img/jugador-collision-coll-capsule.webp" alt="">
+
+                    <p>Crear la colisión nos generará una figura, la cual debemos ajustar al personaje.</p>
+                    <img src="./img/jugador-collision-coll-capsule-setting.webp" alt="">
+
+                    <p>ARRASTRAMOS (dejando el click presionado) los botones de la figura azul, para extender el área.</p>
+                    <p>Ajustamos verticalmente.</p>
+                    <img src="./img/jugador-collision-coll-capsule-drag-y.webp" alt="">
+
+                    <p>También horizontal.</p>
+                    <img src="./img/jugador-collision-coll-capsule-drag-x.webp" alt="">
+                    <p>Ojo, que si el campo azul es más pequeño que el personaje, el juego será muy fácil, pues esquivará hasta que los enemigos llegen a la zona azul.</p>
+                </div>
+            </div>
+
+            <button class="collapsible" id="spawn">El enemigo</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <p>Vamos a crear varios enemigos genéricos.</p>
+                </div>
+            </div>
             
             <button class="collapsible" id="spawn">Spawn de enemigos</button>
             <div class="collapsible-content">
