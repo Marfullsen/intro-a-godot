@@ -274,7 +274,70 @@ func _process(delta):
                     <p>También horizontal.</p>
                     <img src="./img/jugador-collision-coll-capsule-drag-x.webp" alt="">
                     <p>Ojo, que si el campo azul es más pequeño que el personaje, el juego será muy fácil, pues esquivará hasta que los enemigos llegen a la zona azul.</p>
-                </div>
+
+                    <br><hr><br>
+
+                    <p><b>Reemplazamos</b> el código anterior de jugador para que funcione con colisiones.</p>
+                    <pre><code>jugador.gd</code></pre>
+                    <div class="code-wrapper">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M10 1.5H3.5A1.5 1.5 0 0 0 2 3v7h1V3a.5.5 0 0 1 .5-.5H10V1.5z" />
+                                <path
+                                    d="M5 4.5h7.5A1.5 1.5 0 0 1 14 6v7.5a1.5 1.5 0 0 1-1.5 1.5H5a1.5 1.5 0 0 1-1.5-1.5V6A1.5 1.5 0 0 1 5 4.5zm0 1A.5.5 0 0 0 4.5 6v7.5a.5.5 0 0 0 .5.5h7.5a.5.5 0 0 0 .5-.5V6a.5.5 0 0 0-.5-.5H5z" />
+                            </svg>
+                            Copiar
+                        </button>
+                        <pre><code id="code-block">extends Area2D
+
+signal hit
+
+@export var speed = 400
+var screen_size
+
+func _ready():
+	screen_size = get_viewport_rect().size
+
+func _process(delta):
+	var velocity = Vector2.ZERO
+	if Input.is_action_pressed("move_right"):
+		velocity.x += 1
+	if Input.is_action_pressed("move_left"):
+		velocity.x -= 1
+	if Input.is_action_pressed("move_down"):
+		velocity.y += 1
+	if Input.is_action_pressed("move_up"):
+		velocity.y -= 1
+
+	if velocity.length() > 0:
+		velocity = velocity.normalized() * speed
+		$AnimatedSprite2D.play()
+	else:
+		$AnimatedSprite2D.stop()
+	if velocity.x != 0:
+		$AnimatedSprite2D.animation = "walk"
+		$AnimatedSprite2D.flip_v = false
+		# See the note below about the following boolean assignment.
+		$AnimatedSprite2D.flip_h = velocity.x < 0
+	elif velocity.y != 0:
+		$AnimatedSprite2D.animation = "fly"
+		$AnimatedSprite2D.flip_v = velocity.y > 0
+	position += velocity * delta
+	position = position.clamp(Vector2.ZERO, screen_size)
+
+func _on_body_entered(_body):
+	hide() # Player disappears after being hit.
+	hit.emit()
+	# Must be deferred as we can't change physics properties on a physics callback.
+	$CollisionShape2D.set_deferred("disabled", true)
+
+func start(pos):
+	position = pos
+	show()
+	$CollisionShape2D.disabled = false</code></pre>
+                </div></div>
+                <p>Ahora hay que enchufar la señal.</p>
+                <img src="./img/jugador-signal-body.webp" alt="">
             </div>
 
             <button class="collapsible" id="spawn">El enemigo</button>
