@@ -425,20 +425,154 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
             <div class="collapsible-content">
                 <div class="collapsible-content-inner">
                     <p>Vamos a crear la escena principal.</p>
+                    <img src="./img/enemigo-new-scene.webp" alt="">
+
+                    <p>Creamos un NODO.</p>
+                    <img src="./img/main-create-node.webp" alt="">
+
+                    <p>Renombramos a Main (como escena principal)</p>
+                    <img src="./img/main-create-rename.webp" alt="">
+
+                    <p>Vamos a enlazar (linkear) la escena del jugador a la escena principal.</p>
+                    <img src="./img/main-link-jugador.webp" alt="">
+
+                    <p>Ahora vamos a crear <b>tres</b> Timers</p>
+                    <img src="./img/main-timers.webp" alt="">
+
+                    <p>Así debería verse.</p>
+                    <img src="./img/main-marker-and-timers-raw.webp" alt="">
+
+                    <p><b>Renombramos</b> para que se entienda la función de cada uno.</p>
+                    <p><b>MobTimer</b>, <b>ScoreTimer</b>, <b>StartTimer</b> y <b>StartPosition</b></p>
+                    <img src="./img/main-marker-and-timers-renamed.webp" alt="">
+
+                    <p>Ahora debemos asignarles valores a cada uno.</p>
+                    <p>Click en MobTimer, y vemos el inspector al lado derecho del editor.</p>
+                    <img src="./img/main-timer-mobtimer.webp" alt="">
+
+                    <p><b>ScoreTimer se mantendrá sin cambios.</b></p>
+
+                    <p>StartTimer se fijará en 2.0, además de marcar OneShot.</p>
+                    <img src="./img/main-timer-starttimer.webp" alt="">
+
                 </div>
             </div>
 
             <button class="collapsible" id="spawn">Spawn de enemigos</button>
             <div class="collapsible-content">
                 <div class="collapsible-content-inner">
-                    <p>Vamos a crear varios enemigos genéricos.</p>
+                    <p>¿Cómo se generan los enemigos?</p>
+                    <p>Los enemigos irán apareciendo desde un patrón que dibujaremos en los bordes de la pantalla.</p>
+                    <p>Crearemos un Path2D, el cual será HIJO DE MAIN.</p>
+                    <img src="./img/main-path.webp" alt="">
+
+                    <p>Lo renombramos a <b>MobPath</b></p>
+                    <p>Deberíamos ser capaces de ver nuevas opciones.</p>
+                    <p>Debemos hacer click en agregar punto, e iremos haciendo clicks alrederor de las esquinas del mapa.</p>
+                    <p>NOTA: es VITAL que se haga a favor del sentido reloj, de lo contrario los enemigos aparecerán FUERA del mapa.</p>
+                    <p>Finalmente es vital CERRAR LA CURVA CREADA. (paso 5 de la animación GIF que se muestra a continuación)</p>
+                    <img src="./img/draw_path2d.gif" alt="">
+
+                    <p>Ahora debemos crear un nodo hijo a MobPath, para eso le hacemos click y creamos un hijo.</p>
+                    <img src="./img/main-MobSpawnLocation.webp" alt="">
+
+                    <p>Nos aseguramos que sea hijo del nodo MobPath.</p>
+                    <p>Renombramos el PathFollow2D a MobSpawnLocation</p>
+                    <img src="./img/main-MobSpawnLocation-jerarquia.webp" alt="">
+
+                    <p>Crearemos el código de la ESCENA PRINCIPAL (Main)</p>
+                    <img src="./img/main-script-create.webp" alt="">
+
+                    <p>Linkeamos la escena de mobs a Main usando el inspector a la derecha.</p>
+                    <img src="./img/main-mobscene-enemigo.webp" alt="">
+
+                    <p>Hacemos click en jugador y linkeamos la señal "HIT" a la función GAME OVER.</p>
+                    <p>Ojo que debemos escribir <b>manualmente</b> game_over</p>
+                    <img src="./img/main-jugador-hit.webp" alt="">
+
+                    <p>Ahora iremos asignando funciones a cada Timer.</p>
+                    <p>Uno a uno iremos linkeando una señal de Timeout() a cada Timer.</p>
+                    <p>Verificar que están <b>los tres</b> timers con señal Timeout().</p>
+                    <img src="./img/main-jugador-timers-signals-timeout.webp" alt="">
+
+                    <p>Vamos al script de Main, borramos cualquier código anterior y pegamos el siguiente código.</p>
+                    <img src="./img/main-final-code.webp" alt="">
+
+                    <pre><code>main.gb</code></pre>
+                    <div class="code-wrapper">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M10 1.5H3.5A1.5 1.5 0 0 0 2 3v7h1V3a.5.5 0 0 1 .5-.5H10V1.5z" />
+                                <path
+                                    d="M5 4.5h7.5A1.5 1.5 0 0 1 14 6v7.5a1.5 1.5 0 0 1-1.5 1.5H5a1.5 1.5 0 0 1-1.5-1.5V6A1.5 1.5 0 0 1 5 4.5zm0 1A.5.5 0 0 0 4.5 6v7.5a.5.5 0 0 0 .5.5h7.5a.5.5 0 0 0 .5-.5V6a.5.5 0 0 0-.5-.5H5z" />
+                            </svg>
+                            Copiar
+                        </button>
+                        <pre><code id="code-block">extends Node
+
+@export var mob_scene: PackedScene
+var score
+
+func _ready():
+	new_game()
+
+func game_over():
+	$ScoreTimer.stop()
+	$MobTimer.stop()
+
+func new_game():
+	score = 0
+	$Jugador.start($StartPosition.position)
+	$StartTimer.start()
+
+
+func _on_mob_timer_timeout():
+	# Create a new instance of the Mob scene.
+	var mob = mob_scene.instantiate()
+
+	# Choose a random location on Path2D.
+	var mob_spawn_location = $MobPath/MobSpawnLocation
+	mob_spawn_location.progress_ratio = randf()
+
+	# Set the mob's position to the random location.
+	mob.position = mob_spawn_location.position
+
+	# Set the mob's direction perpendicular to the path direction.
+	var direction = mob_spawn_location.rotation + PI / 2
+
+	# Add some randomness to the direction.
+	direction += randf_range(-PI / 4, PI / 4)
+	mob.rotation = direction
+
+	# Choose the velocity for the mob.
+	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
+	mob.linear_velocity = velocity.rotated(direction)
+
+	# Spawn the mob by adding it to the Main scene.
+	add_child(mob)
+
+
+func _on_score_timer_timeout():
+	score += 1
+
+func _on_start_timer_timeout():
+	$MobTimer.start()
+	$ScoreTimer.start()</code></pre>
+                    </div>
+
+                    <p>Ya debieran aparecen los enemigos alrededor del personaje.</p>
+                    <p>En algunos casos es necesario especificar que ejecutaremos la escena principal.</p>
+                    <img src="./img/main-run-current-scene.webp" alt="">
                 </div>
             </div>
-            
-            <button class="collapsible" id="mapa">Ajustando el mapa</button>
+            <button class="collapsible collapsible-challenge" id="movimientos">Desafío</button>
             <div class="collapsible-content">
                 <div class="collapsible-content-inner">
-                    <p>Vamos a ajustar los puntos de donde nacen los enemigos.</p>
+                    <div class="challenge">
+                        <h4>💪 Desafío</h4>
+                        <p>1. Añadir más enemigos de diferentes colores y formas.</p>
+                        <p>2. Altera los valores de los Timers y Markers para que el personaje inicie en otro lugar y los enemigos aparezcan más tarde.</p>
+                    </div>
                 </div>
             </div>
         </section>
