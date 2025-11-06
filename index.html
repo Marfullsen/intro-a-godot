@@ -335,18 +335,99 @@ func start(pos):
 	position = pos
 	show()
 	$CollisionShape2D.disabled = false</code></pre>
-                </div></div>
-                <p>Ahora hay que enchufar la señal.</p>
-                <img src="./img/jugador-signal-body.webp" alt="">
+                    </div>
+                    <p>Ahora hay que enchufar la señal.</p>
+                    <img src="./img/jugador-signal-body.webp" alt="">
+                </div>
             </div>
 
             <button class="collapsible" id="spawn">El enemigo</button>
             <div class="collapsible-content">
                 <div class="collapsible-content-inner">
                     <p>Vamos a crear varios enemigos genéricos.</p>
+                    <p>Primero crearemos una nueva escena</p>
+                    <img src="./img/enemigo-new-scene.webp" alt="">
+
+                    <p>Otro Nodo</p>
+                    <img src="./img/enemigo-new-scene-node.webp" alt="">
+
+                    <p>Tipo RigidBody2D</p>
+                    <img src="./img/enemigo-new-scene-rigidbody2d.webp" alt="">
+
+                    <P>Tendremos el objeto creado.</P>
+                    <img src="./img/enemigo-new-scene-rigidbody2d-rename.webp" alt="">
+
+                    <p>Renombramos a Enemigo. CON MAYÚSCULA EN LA PRIMERA LETRA.</p>
+                    <p>Crearemos el objeto que contendrá las animaciones, otro objeto para colisiones, TAL Y COMO SE HIZO ANTES.</p>
+                    <p>Estos tres objetos se deben crear, MUCHO OJO EN LA JERARQUÍA. (DEBEN ser hijos de ENEMIGO)</p>
+                    <img src="./img/enemigo-new-scene-childs.webp" alt="">
+
+                    <p>Los objetos a crear son: <b>AnimatedSprite2D</b>, <b>CollisionShape2D</b>, y <b>VisibleOnScreenNotifier2D</b></p>
+                    <p>El más conplejo será el nuevo objeto <b>VisibleOnScreenNotifier2D</b>, pues hay uno muy parecido y podrían confundirse.</p>
+                    <img src="./img/enemigo-new-scene-VisibleOnScreenNotifier.webp" alt="">
+
+                    <p>Una vez creados los tres objetos debiera verse así.</p>
+                    <img src="./img/enemigo-new-scene-three-childs.webp" alt="">
+
+                    <p>Ahora eliminaremos la gravedad, seleccionamos <b>ENEMIGO</b>, y moveremos un valor de gravedad, de lo contrario nuestro personaje CAERA SIN SENTIDO HACIA ABAJO.</p>
+                    <img src="./img/enemigo-new-scene-gravity-null.webp" alt="">
+
+                    <p>En el mismo menú, un poco más abajo DESACTIVAREMOS LA MÁSCARA DE LA CAPA 1.</p>
+                    <img src="./img/enemigo-new-scene-mask.webp" alt="">
+
+                    <P>De esta manera los enemigos NO CHOCARAN ENTRE ELLOS.</P>
+                    <img src="./img/enemigo-new-scene-mask-not-selected.webp" alt="">
+
+                    <p>Ahora agregaremos las animaciones, TAL Y COMO LO HICIMOS CON EL PERSONAJE PRINCIPAL.</p>
+                    <p>(Si no lo recuerdas, click en el objeto <b>AnimatedSprite2D</b>, y podremos agregar animaciones en el panel derecho.</p>
+                    <img src="./img/enemigo-new-scene-animations.webp" alt="">
+
+                    <p>Cargamos los sprites de los enemigos.</p>
+                    <img src="./img/enemigo-new-scene-animations-sprites.webp" alt="">
+                    
+                    <p>Y Asignamos cada images a movimientos de cada enemigo, en este caso Volar, Nadar y Caminar (todos en inglés)</p>
+                    <img src="./img/enemigo-new-scene-animations-sprites-enemies.webp" alt="">
+
+                    <p>En algunos casos puede ser necesario girar la cápsula de colisión en 90 grados para que caiga el personaje.</p>
+                    <img src="./img/enemigo-new-scene-animations-sprites-col.webp" alt="">
+
+                    <p>Creamos un nuevo script para "enemigo"</p>
+                    <img src="./img/enemigo-code.webp" alt="">
+
+                    <p>Este es el código que debe llevar ese archivo.</p>
+                    <pre><code>jugador.gd</code></pre>
+                    <div class="code-wrapper">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M10 1.5H3.5A1.5 1.5 0 0 0 2 3v7h1V3a.5.5 0 0 1 .5-.5H10V1.5z" />
+                                <path
+                                    d="M5 4.5h7.5A1.5 1.5 0 0 1 14 6v7.5a1.5 1.5 0 0 1-1.5 1.5H5a1.5 1.5 0 0 1-1.5-1.5V6A1.5 1.5 0 0 1 5 4.5zm0 1A.5.5 0 0 0 4.5 6v7.5a.5.5 0 0 0 .5.5h7.5a.5.5 0 0 0 .5-.5V6a.5.5 0 0 0-.5-.5H5z" />
+                            </svg>
+                            Copiar
+                        </button>
+                        <pre><code id="code-block">extends RigidBody2D
+
+func _ready():
+	var mob_types = Array($AnimatedSprite2D.sprite_frames.get_animation_names())
+	$AnimatedSprite2D.animation = mob_types.pick_random()
+	$AnimatedSprite2D.play()
+
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	queue_free()</code></pre>
+                    </div>
+
+                    <p>El código tomará animaciones al azar para desplegar enemigos en la pantalla.</p>
+                    <p>Asegurate de <b>Guardar la escena</b>.</p>
                 </div>
             </div>
             
+            <button class="collapsible" id="spawn">La escena principal</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <p>Vamos a crear la escena principal.</p>
+                </div>
+            </div>
+
             <button class="collapsible" id="spawn">Spawn de enemigos</button>
             <div class="collapsible-content">
                 <div class="collapsible-content-inner">
