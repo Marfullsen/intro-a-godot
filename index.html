@@ -588,7 +588,21 @@ func _on_start_timer_timeout():
             <button class="collapsible" id="interfaz">Interfaz de usuario en el menú principal</button>
             <div class="collapsible-content">
                 <div class="collapsible-content-inner">
-                    <p>Vamos a añadir más Botones de inicio, pausa y game over.</p>
+                    <p>Vamos a crear un panel para la visualización de los datos como puntaje, tiempo, etc.</p>
+                    <p>Partimos creando una nueva escena:</p>
+                    <img src="./img/panel-nueva-escena.webp" alt="">
+                    <p>Creamos un nodo "other", y buscamos CanvasLayer.</p>
+                    <img src="./img/panel-node-CanvasLayer.webp" alt="">
+                    <p>Renombramos a "info" (con esa abreviatura nos referimos al Panel de Información del Juego)</p>
+                    <img src="./img/panel-node-CanvasLayer-rename.webp" alt="">
+                    <p>Agregamos tres elementos:</p>
+                    <p>Label, Label, Button, Timer</p>
+                    <img src="./img/panel-childs-add-label.webp" alt="">
+                    <img src="./img/panel-childs-add-button.webp" alt="">
+                    <img src="./img/panel-childs-add-timer.webp" alt="">
+                    <p>Debe quedar así:</p>
+                    <img src="./img/panel-childs-add-jerarquia.webp" alt="">
+                    <!-- <p>Vamos a añadir más Botones de inicio, pausa y game over.</p> -->
                 </div>
             </div>
             
