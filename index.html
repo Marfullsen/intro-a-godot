@@ -498,7 +498,7 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
                     <p>Vamos al script de Main, borramos cualquier código anterior y pegamos el siguiente código.</p>
                     <img src="./img/main-final-code.webp" alt="">
 
-                    <pre><code>main.gb</code></pre>
+                    <pre><code>main.gd</code></pre>
                     <div class="code-wrapper">
                         <button class="copy-btn" onclick="copyCode(this)">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
@@ -602,14 +602,159 @@ func _on_start_timer_timeout():
                     <img src="./img/panel-childs-add-timer.webp" alt="">
                     <p>Debe quedar así:</p>
                     <img src="./img/panel-childs-add-jerarquia.webp" alt="">
+                    <p>Renombramos a: Puntaje, Mensaje, BotonIniciar y TimerMensaje</p>
+                    <img src="./img/panel-childs-add-jerarquia-rename.webp" alt="">
+                    <p>Click en Puntaje, vamos al inspector, y fijamos el valor por defecto en 0.</p>
+                    <img src="./img/panel-childs-puntaje-set-value.webp" alt="">
+                    <p>Dentro del mismo inspector, si bajamos, encontraremos un apartado de control, buscamos y clickeamos Theme Override, y hacemos click en Font Sizes, fijamos el valor en 64</p>
+                    <img src="./img/panel-childs-puntaje-set-size.webp" alt="">
+                    <p>Ahora en la parte superior iremos a 2D, y centraremos el puntaje en la parte superior de la pantalla del juego.</p>
+                    <img src="./img/panel-childs-puntaje-set-anchor.webp" alt="">
+                    <p>Repetimos los pasos con el mensaje, fijamos la posición, añadimos texto y le damos el tamaño de la fuente.</p>
+                    <img src="./img/panel-childs-mensaje-set-anchor-n-text.webp" alt="">
+                    <p>Con el botón Iniciar, también seguirmos los mismos pasos.</p>
+                    <p>Arrastraremos el botón para dejarlo en el centro. (Para más precisión usar Control/Layout/Transform)</p>
+                    <img src="./img/panel-childs-btn-iniciar.webp" alt="">
+                    <p>Para el Timer mensaje haremos lo siguiente:</p>
+                    <img src="./img/panel-childs-timer-mensaje.webp" alt="">
+                    <p>Para que todas las funciones que hemos incorporado puedan funcionar, debemos enlazarlas a un código.</p>
+                    <p>Creamos un código al panel de información (el nodo llamado info).</p>
+                    <img src="./img/panel-scpipt.webp" alt="">
+                    <p>El código que pegaremos será el siguiente:</p>
+<pre><code>info.gd</code></pre>
+                    <div class="code-wrapper">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M10 1.5H3.5A1.5 1.5 0 0 0 2 3v7h1V3a.5.5 0 0 1 .5-.5H10V1.5z" />
+                                <path
+                                    d="M5 4.5h7.5A1.5 1.5 0 0 1 14 6v7.5a1.5 1.5 0 0 1-1.5 1.5H5a1.5 1.5 0 0 1-1.5-1.5V6A1.5 1.5 0 0 1 5 4.5zm0 1A.5.5 0 0 0 4.5 6v7.5a.5.5 0 0 0 .5.5h7.5a.5.5 0 0 0 .5-.5V6a.5.5 0 0 0-.5-.5H5z" />
+                            </svg>
+                            Copiar
+                        </button>
+                        <pre><code id="code-block">extends CanvasLayer
+
+# Notifies `Main` node that the button has been pressed
+signal start_game
+
+func show_message(text):
+	$Mensaje.text = text
+	$Mensaje.show()
+	$TimerMensaje.start()
+
+func show_game_over():
+	show_message("Game Over")
+	# Wait until the MessageTimer has counted down.
+	await $TimerMensaje.timeout
+
+	$Mensaje.text = "Chispas!"
+	$Mensaje.show()
+	# Make a one-shot timer and wait for it to finish.
+	await get_tree().create_timer(1.0).timeout
+	$BotonIniciar.show()
+
+func update_score(score):
+	$Puntaje.text = str(score)
+
+
+func _on_boton_iniciar_pressed() -> void:
+	$BotonIniciar.hide()
+	start_game.emit()
+
+func _on_timer_mensaje_timeout() -> void:
+	$Mensaje.hide()</code></pre>
+                    </div>
+
+                    <p>Click en el nodo del botón y agregamos las señales para que se establezca la comunicación con el botón iniciar.</p>
+                    <img src="./img/panel-scpipt-link-start-btn.webp" alt="">
+                    <p>Lo mismo para el TimerMensaje</p>
+                    <img src="./img/panel-scpipt-link-timer-msg.webp" alt="">
+                    <p>Iremos a la escena principal (Main), y linkeamos el panel que ya está terminado.</p>
+                    <img src="./img/panel-scpipt-link-info.webp" alt="">
+                    <p>Debería verse así:</p>
+                    <img src="./img/panel-scpipt-link-info-linked.webp" alt="">
+                    <p>Linkeamos el botón iniciar a la función para iniciar el juego ubicada en Main.</p>
+                    <img src="./img/panel-scpipt-link-info-main.webp" alt="">
+                    <p>Si intentamos correr el código de la escena Main, veremos el juego así:</p>
+                    <img src="./img/panel-scpipt-link-info-main-test.webp" alt="">
+                    <p>Al iniciar, mientras más segundos logremos sobrevivir, más puntaje obtendremos.</p>
+                    <img src="./img/panel-scpipt-link-info-main-test-playing.webp" alt="">
                     <!-- <p>Vamos a añadir más Botones de inicio, pausa y game over.</p> -->
                 </div>
             </div>
             
-            <button class="collapsible" id="puntuacion">Mejorando la competitividad agregando puntuación</button>
+            <button class="collapsible" id="puntuacion">Eliminar los enemigos</button>
             <div class="collapsible-content">
                 <div class="collapsible-content-inner">
-                    <p>Vamos a añadir puntuación para mejorar la competitividad.</p>
+                    <p>El principal problema de los enemigos es que al finalizar la partida, estos siguen en pantalla.</p>
+                    <img src="./img/mobs-queue-free-group.webp" alt="">
+                    <p>El código de main que reemplazaremos será el siguiente:</p>
+<pre><code>main.gd</code></pre>
+                    <div class="code-wrapper">
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M10 1.5H3.5A1.5 1.5 0 0 0 2 3v7h1V3a.5.5 0 0 1 .5-.5H10V1.5z" />
+                                <path
+                                    d="M5 4.5h7.5A1.5 1.5 0 0 1 14 6v7.5a1.5 1.5 0 0 1-1.5 1.5H5a1.5 1.5 0 0 1-1.5-1.5V6A1.5 1.5 0 0 1 5 4.5zm0 1A.5.5 0 0 0 4.5 6v7.5a.5.5 0 0 0 .5.5h7.5a.5.5 0 0 0 .5-.5V6a.5.5 0 0 0-.5-.5H5z" />
+                            </svg>
+                            Copiar
+                        </button>
+                        <pre><code id="code-block">extends Node
+
+@export var mob_scene: PackedScene
+var score
+
+func _ready():
+	pass
+
+func game_over():
+	$ScoreTimer.stop()
+	$MobTimer.stop()
+	$Info.show_game_over()
+
+func new_game():
+	get_tree().call_group("enemigos", "queue_free")
+	score = 0
+	$Info.update_score(score)
+	$Info.show_message("¿Estás listo?")
+	$Jugador.start($StartPosition.position)
+	$StartTimer.start()
+	
+
+
+func _on_mob_timer_timeout():
+	# Create a new instance of the Mob scene.
+	var mob = mob_scene.instantiate()
+
+	# Choose a random location on Path2D.
+	var mob_spawn_location = $MobPath/MobSpawnLocation
+	mob_spawn_location.progress_ratio = randf()
+
+	# Set the mob's position to the random location.
+	mob.position = mob_spawn_location.position
+
+	# Set the mob's direction perpendicular to the path direction.
+	var direction = mob_spawn_location.rotation + PI / 2
+
+	# Add some randomness to the direction.
+	direction += randf_range(-PI / 4, PI / 4)
+	mob.rotation = direction
+
+	# Choose the velocity for the mob.
+	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
+	mob.linear_velocity = velocity.rotated(direction)
+
+	# Spawn the mob by adding it to the Main scene.
+	add_child(mob)
+
+
+func _on_score_timer_timeout():
+	score += 1
+	$Info.update_score(score)
+
+func _on_start_timer_timeout():
+	$MobTimer.start()
+	$ScoreTimer.start()</code></pre>
+                    </div>
                 </div>
             </div>
             
@@ -617,13 +762,19 @@ func _on_start_timer_timeout():
             <div class="collapsible-content">
                 <div class="collapsible-content-inner">
                     <p>Vamos a añadir música de fondo para mejorar la jugabilidad.</p>
-            
-            <div class="challenge">
-                <h4>💪 Desafío</h4>
-                <p>1. Añadir un botón para los créditos.</p>
-                <p>2. Añadir un botón para cambiar de canción y otro para mutear el juego.</p>
-                <p>3. Añadir un botón para salir del juego.</p>
+                    <p>Tomar como un desafío.</p>
+                </div>
             </div>
+            
+            <button class="collapsible collapsible-challenge">Desafío</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <div class="challenge">
+                        <h4>💪 Desafío</h4>
+                        <p>1. Añadir un botón para los créditos.</p>
+                        <p>2. Añadir un botón para cambiar de canción y otro para mutear el juego.</p>
+                        <p>3. Añadir un botón para salir del juego.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -642,13 +793,18 @@ func _on_start_timer_timeout():
             <div class="collapsible-content">
                 <div class="collapsible-content-inner">
                     <p>Vamos a añadir un fragmento necesario para conectarse a un servidor dedicado.</p>
-            
-            <div class="challenge">
-                <h4>💪 Desafío</h4>
-                <p>1. Configurar un descubridor de puertos del juego disponible automáticamente.</p>
-                <p>2. Crear salas de juego diferentes.</p>
-                <p>3. Apalear los problemas que puedan estar causando lag, jittering, y otros problemas.</p>
+                </div>
             </div>
+            
+            <button class="collapsible collapsible-challenge">Desafío</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <div class="challenge">
+                        <h4>💪 Desafío</h4>
+                        <p>1. Configurar un descubridor de puertos del juego disponible automáticamente.</p>
+                        <p>2. Crear salas de juego diferentes.</p>
+                        <p>3. Apalear los problemas que puedan estar causando lag, jittering, y otros problemas.</p>
+                    </div>
                 </div>
             </div>
         </section>
