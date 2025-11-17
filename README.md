@@ -118,3 +118,7 @@ Pantalla principal, se aprecian fragmentos copiables de código y desafíos de c
 - :man_teacher: Agradecimientos al profesor **Erwin Aguilera Segura** de la sede San Joaquin por permitirme hacer un mes de clases de Godot 4.
 - :book: Agradecimientos al _CITT de San Joaquin_ que imparte diferentes talleres para apoyar a los estudiantes a ir más allá de la sala de clasaes.
 - 🎮 Agradecimientos a Godot Engine por motivarnos a crear videojuegos.
+
+
++ 👾 Documentación Oficial de Godot (en inglés): [docs.godotengine.org](https://docs.godotengine.org/en/stable/)
++ 👾 Tutorial para crear tu primer juego 2D (en inglés). [Godot Engine Docs - Your first 2D game](https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html)
