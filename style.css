@@ -2,16 +2,18 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
 }
 
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: #00d2ff;
-  background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);
-  background: linear-gradient(to right, #3a7bd5, #00d2ff);
-  background-attachment: fixed;
+  background: #1a1a1a;
   color: #333;
   line-height: 1.6;
+}
+
+#icon_godot {
+  transform: rotate(10deg);
 }
 
 .container {
@@ -24,13 +26,12 @@ header {
   text-align: center;
   padding: 60px 20px;
   background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
   margin-bottom: 40px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
 }
 
 header h2 {
-  color: #3a7bd5;
+  color: #777;
   font-size: 1.2em;
   margin-bottom: 10px;
   text-transform: uppercase;
@@ -38,8 +39,9 @@ header h2 {
 }
 
 header h1 {
-  font-size: 3em;
-  color: #00d2ff;
+  font-size: 3.5em;
+  font-family: "Architects Daughter", cursive;
+  color: #444;
   margin-bottom: 15px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -51,7 +53,6 @@ header p {
 
 nav {
   background: rgba(255, 255, 255, 0.95);
-  border-radius: 15px;
   padding: 20px;
   margin-bottom: 40px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
@@ -60,7 +61,7 @@ nav {
 }
 
 .nav-collapsible {
-  background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+  background: #ffb800;
   color: white;
   cursor: pointer;
   padding: 15px;
@@ -70,7 +71,6 @@ nav {
   outline: none;
   font-size: 1.5em;
   font-weight: 600;
-  border-radius: 10px;
   transition: all 0.3s ease;
   display: flex;
   justify-content: space-between;
@@ -147,22 +147,22 @@ nav ul ul a:hover {
 
 section {
   background: rgba(255, 255, 255, 0.95);
-  border-radius: 15px;
   padding: 40px;
   margin-bottom: 30px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
 }
 
 section h3 {
-  color: #3a7bd5;
+  color: #333;
+  font-family: "Architects Daughter", cursive;
   font-size: 2em;
   margin-bottom: 20px;
   padding-bottom: 15px;
-  border-bottom: 3px solid #00d2ff;
+  border-bottom: 3px solid #343a40;
 }
 
 section h4 {
-  color: #00d2ff;
+  color: #343a40;
   font-size: 1.5em;
   margin: 30px 0 15px 0;
 }
@@ -191,7 +191,6 @@ section img {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   padding: 25px;
-  border-radius: 10px;
   margin: 30px 0;
 }
 
@@ -209,25 +208,23 @@ footer {
   text-align: center;
   padding: 30px;
   background: rgba(255, 255, 255, 0.95);
-  border-radius: 15px;
   margin-top: 40px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
 }
 
 footer p {
-  color: #666;
+  color: #999;
   font-size: 1.1em;
 }
 
 .divider {
   height: 3px;
-  background: linear-gradient(to right, #3a7bd5, #00d2ff);
+  background: #343a40;
   margin: 30px 0;
-  border-radius: 2px;
 }
 
 .collapsible {
-  background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+  background: #75CCEB;
   color: white;
   cursor: pointer;
   padding: 18px;
@@ -238,7 +235,6 @@ footer p {
   font-size: 1.3em;
   font-weight: 600;
   margin-top: 25px;
-  border-radius: 10px;
   transition: all 0.3s ease;
   display: flex;
   justify-content: space-between;
@@ -247,7 +243,7 @@ footer p {
 }
 
 .collapsible-challenge {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #75CCEB 0%, #509FE2 100%);
 }
 
 .collapsible:hover {
@@ -271,7 +267,6 @@ footer p {
   overflow: hidden;
   transition: max-height 0.3s ease-out;
   background: rgba(58, 123, 213, 0.05);
-  border-radius: 0 0 10px 10px;
   margin-top: -5px;
 }
 
@@ -283,7 +278,6 @@ footer p {
   position: relative;
   background: #f5f5f5;
   border: 1px solid #ddd;
-  border-radius: 4px;
   padding: 1rem;
   overflow-x: auto;
 }
@@ -294,7 +288,6 @@ footer p {
   background: #4caf50;
   color: #fff;
   border: none;
-  border-radius: 3px;
   padding: 0.3rem 0.6rem;
   cursor: pointer;
   font-size: 0.9rem;
