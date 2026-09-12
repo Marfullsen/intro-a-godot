@@ -23,6 +23,21 @@ body {
 }
 
 header {
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #495057;
+  font-size: calc(1.275rem + .3vw);
+  color: #fff;
+}
+
+header a {
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.titles {
   text-align: center;
   padding: 60px 20px;
   background: rgba(255, 255, 255, 0.95);
@@ -30,7 +45,7 @@ header {
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
 }
 
-header h2 {
+.titles h2 {
   color: #777;
   font-size: 1.2em;
   margin-bottom: 10px;
@@ -38,7 +53,7 @@ header h2 {
   letter-spacing: 2px;
 }
 
-header h1 {
+.titles h1 {
   font-size: 3.5em;
   font-family: "Architects Daughter", cursive;
   color: #444;
@@ -46,7 +61,7 @@ header h1 {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-header p {
+.titles p {
   font-size: 1.3em;
   color: #666;
 }
@@ -301,7 +316,7 @@ footer p {
 }
 
 @media (max-width: 768px) {
-  header h1 {
+  .titles h1 {
     font-size: 2em;
   }
 
