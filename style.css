@@ -238,6 +238,45 @@ footer p {
   margin: 30px 0;
 }
 
+#cierre {
+  padding: 24px;
+}
+
+#cierre .card {
+  padding: 1rem;
+  border-radius: 0.375rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+}
+
+#cierre .card-icon {
+  width: 56px;
+  height: 56px;
+  color: #fff;
+  flex: 0 0 auto;
+}
+
+.card-info h4, .card-info p {
+  color: #fff;
+}
+
+#fragen {
+  background: #6366F1;
+}
+
+#danksagen {
+  background: #6c757d;
+}
+
+#endkampf {
+  background: #db3545;
+}
+
+#feedback {
+  background-color: #198754;
+}
+
 .collapsible {
   background: #75CCEB;
   color: white;
