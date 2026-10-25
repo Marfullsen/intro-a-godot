@@ -262,19 +262,19 @@ footer p {
 }
 
 #fragen {
-  background: #6366F1;
+  background: linear-gradient(180deg,rgba(99, 102, 241, 1) 0%, rgba(138, 140, 255, 1) 50%, rgba(65, 68, 250, 1) 100%);
 }
 
 #danksagen {
-  background: #6c757d;
+  background: linear-gradient(180deg, rgba(108, 117, 125, 1) 0%, rgba(146, 156, 164, 1) 50%, rgba(84, 92, 99, 1) 100%);
 }
 
 #endkampf {
-  background: #db3545;
+  background: linear-gradient(180deg, rgba(219, 53, 69, 1) 0%, rgba(255, 111, 125, 1) 50%, rgba(179, 35, 49, 1) 100%);
 }
 
 #feedback {
-  background-color: #198754;
+  background: linear-gradient(180deg, rgba(25, 135, 84, 1) 0%, rgba(85, 195, 132, 1) 50%, rgba(17, 105, 63, 1) 100%);
 }
 
 .collapsible {
